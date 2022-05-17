@@ -24,3 +24,4 @@ Route::apiResource('Favorietproducts', FavorietproductsController::class);
 Route::apiResource('User', UserController::class);
 
 Route::get('Category/{id}/Products', [ProductController::class, 'indexCategory']);
+Route::delete('Products/delete/{id}',[ProductController::class, 'delete' ]);

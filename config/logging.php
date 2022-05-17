@@ -113,6 +113,30 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+          'User' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/User.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
+        'Product' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/Product.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
+        'Favorietproducts' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/Favorietproducts.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
+        'Category'=> [
+            'driver' => 'single',
+            'path' => storage_path('logs/Category.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];

@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Favorietproducts extends Model
 {
     protected $table = 'favorietproducts';
-    protected $fillable = ["id", "user_id", "product_id", "description"];
+    protected $fillable = [ "user_id", "product_id"];
+    public $timestamps = false;
 }

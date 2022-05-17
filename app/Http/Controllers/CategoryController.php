@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -14,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        Log::channel('Category')->info('Haal alle categorieen op');
         return Category::all();
     }
 
@@ -25,6 +27,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        Log::channel('Category')->info('Maak nieuwe Category aan');
         return Category::create($request->all());
     }
 
@@ -36,6 +39,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        Log::channal('Category')->info('Haal Category op met ID: ' . $category->id);
         return $category;
 
     }
@@ -49,6 +53,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        Log::channel('Category')->info('Update Category');
         $category->update($request->all());
         return $category;
 
@@ -62,7 +67,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Log::channel('Category')->info('Verwijder Category');
         $category->delete();
-        
+
     }
 }

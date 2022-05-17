@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -14,8 +15,23 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('User')) return User::where('email',$request->User)->get();
-        return  User::all();
+        // if ($request->has('email'))  return User::where('email',$request->email)->get();
+        // Log::channel('User')->info('Haal alle gebruikers op');
+        // return  User::all();
+
+        if($request -> has('email'))
+        {
+        Log::channel('User')->info("Haal gebruiker op met email: " . $request->email);
+            return User::where('email', $request->email)->get();
+
+        }
+        else
+        {
+            Log::channel('User')->info('Haal alle gebruikers op');
+
+            return User::all();
+        }
+
     }
 
     /**
@@ -26,6 +42,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Log::channel('User')->info('Maak nieuwe gebruiker aan');
         return User::create($request->all());
     }
 
@@ -49,6 +66,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        Log::channel('User')->info('Update gebruiker');
+
         $user->update($request->all());
         return $user;
     }
@@ -61,6 +80,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        Log::channel('User')->info('Verwijder gebruiker');
         $user->delete();
         return $user;
     }

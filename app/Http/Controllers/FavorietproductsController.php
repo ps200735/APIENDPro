@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorietproducts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class FavorietproductsController extends Controller
 {
@@ -14,8 +16,19 @@ class FavorietproductsController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('User')) return Favorietproducts::where('user_id', $request->User)->get();
-        return  Favorietproducts::all();
+
+        if ($request->has('User'))
+        {
+            Log::channel('Favorietproducts')->info('Haal Favorietproducts op van gebruiker met ID: ' . $request->User);
+            return Favorietproducts::where('user_id', $request->User)->get();
+        }else{
+            Log::channel('Favorietproducts')->info('Haal Favorietproducts op');
+            return Favorietproducts::all();
+        }
+
+
+
+
     }
 
     /**
@@ -26,6 +39,7 @@ class FavorietproductsController extends Controller
      */
     public function store(Request $request)
     {
+        Log::channel('Favorietproducts')->info('Maak nieuwe Favorietproducts aan');
         return Favorietproducts::create($request->all());
     }
 
@@ -60,6 +74,7 @@ class FavorietproductsController extends Controller
      */
     public function destroy(Favorietproducts $favorietproducts)
     {
+        Log::channel('Favorietproducts')->info('Verwijder Favorietproducts');
         $favorietproducts->delete();
         return $favorietproducts;
     }
